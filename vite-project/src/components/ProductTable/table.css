@@ -31,3 +31,13 @@
     color: #333;
   }
   
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; 
+  font-size: 1.5rem; 
+  font-family: Arial, sans-serif;
+  color: #555;
+  padding-left: 600px;
+}

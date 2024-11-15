@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import ProductTable from "./components/ProductTable/producttable"
+import React, { useState, useEffect } from 'react';
+import ProductTable from "./components/ProductTable/producttable";
+
 
 async function fetchData() {
   try {
@@ -17,15 +18,20 @@ async function fetchData() {
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const getData = async () => {
-    const data = await fetchData();
-    setProducts(data);
-  };
+  useEffect(() => {
+    const getData = async () => {
+      const data = await fetchData();
+      setProducts(data);
+      setLoading(false); 
+    };
 
-  
-  if (products.length === 0) {
     getData();
+  }, []);
+
+  if (loading) {
+    return <div className="loader">Loading...</div>;
   }
 
   return (
@@ -37,4 +43,3 @@ function App() {
 }
 
 export default App;
-
