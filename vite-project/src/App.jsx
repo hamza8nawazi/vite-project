@@ -9,7 +9,7 @@ async function fetchData() {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    return data;
+    return data.slice(0, 10);
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
