@@ -1,5 +1,6 @@
 
 import ProductRow from './productrow'
+import { Link } from "react-router-dom";
 import "./table.css"
 import React, { useState } from "react";
 import Table from "@mui/material/Table";
@@ -11,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
 
+
 const ProductTable = ({ products }) => {
   const [page, setPage] = useState(0);
   const rowsPerPage = 5; 
@@ -18,6 +20,10 @@ const ProductTable = ({ products }) => {
   
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+  };
+
+  const showdetails = (product) => {
+    console.log("Product Details:", product);
   };
 
  
@@ -41,7 +47,11 @@ const ProductTable = ({ products }) => {
             {paginatedProducts.map((product) => (
               <TableRow key={product.id}>
                 <TableCell>{product.id}</TableCell>
-                <TableCell>{product.title}</TableCell>
+                <TableCell>
+                  <Link to={`/product/${product.id}`} style={{ color: "blue", cursor: "pointer" }}>
+                    {product.title}
+                  </Link>
+                </TableCell>
                 <TableCell>{product.price.toFixed(2)}</TableCell>
               </TableRow>
             ))}

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductTable from "./components/ProductTable/producttable";
+import ProductDetailPage from './components/ProductDetailPage/ProductDetailPage';
+
 
 
 async function fetchData() {
@@ -35,10 +38,24 @@ function App() {
   }
 
   return (
-    <div className="product-table-container">
-      <h1>Product List</h1>
-      <ProductTable products={products} />
-    </div>
+   <div className="product-table-container">
+    <h1>Product listing</h1>
+    
+
+    <Router>
+    <Routes>
+      <Route
+        path="/"
+        element={<ProductTable products={products} />}
+      />
+      <Route
+        path="/product/:id"
+        element={<ProductDetailPage />}
+      />
+    </Routes>
+  </Router>
+  </div>
+ 
   );
 }
 
