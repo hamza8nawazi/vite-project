@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductTable from "./components/ProductTable/producttable";
 import ProductDetailPage from './components/ProductDetailPage/ProductDetailPage';
+import LoginPage from './components/LoginPage/login';
+import SignupPage from './components/SignupPage/signup';
 
 
 
@@ -43,17 +45,13 @@ function App() {
     
 
     <Router>
-    <Routes>
-      <Route
-        path="/"
-        element={<ProductTable products={products} />}
-      />
-      <Route
-        path="/product/:id"
-        element={<ProductDetailPage />}
-      />
-    </Routes>
-  </Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/products" element={<ProductTable products={products} />} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
+      </Routes>
+    </Router>
   </div>
  
   );
