@@ -1,32 +1,35 @@
-import { Container, TextField, Button, Typography, Box } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import {  TextField, Button} from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import "./login.css"
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+
+  const handleLogin = (e) => {
     e.preventDefault();
     console.log("Login form submitted");
-    navigate('/products'); 
+    navigate('/products');
   };
+
   return (
-    <Container maxWidth="xs" sx={{ mt: 5 }}>
-      <Typography variant="h4" gutterBottom align="center">
-        Login
-      </Typography>
-      <form onSubmit={handleSubmit}>
-        <Box display="flex" flexDirection="column" gap={2}>
+    <div className="login-container">
+      <h2 className="login-title">Login</h2>
+      <form onSubmit={handleLogin} className="login-form">
+        <div className="form-group">
           <TextField label="Email" type="email" fullWidth required />
+        </div>
+        <div className="form-group">
           <TextField label="Password" type="password" fullWidth required />
-          <Button type="submit" variant="contained" color="primary" fullWidth>
-            Login
-          </Button>
-        </Box>
+        </div>
+        <Button type="submit" variant="contained" color="primary" fullWidth>
+          Login
+        </Button>
       </form>
-      <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+      <p className="login-footer">
         Don't have an account? <Link to="/signup">Sign Up</Link>
-      </Typography>
-    </Container>
+      </p>
+    </div>
   );
 };
 

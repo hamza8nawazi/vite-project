@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
+import "./signup.css"
 const SignupPage = () => {
   const navigate = useNavigate();
 
@@ -12,24 +12,26 @@ const SignupPage = () => {
   };
 
   return (
-    <Container maxWidth="xs" sx={{ mt: 5 }}>
-      <Typography variant="h4" gutterBottom align="center">
-        Sign Up
-      </Typography>
-      <form onSubmit={handleSubmit}>
-        <Box display="flex" flexDirection="column" gap={2}>
+    <div className="signup-container">
+      <h2 className="signup-title">Sign Up</h2>
+      <form onSubmit={handleSubmit} className="signup-form">
+        <div className="form-group">
           <TextField label="Name" fullWidth required />
+        </div>
+        <div className="form-group">
           <TextField label="Email" type="email" fullWidth required />
+        </div>
+        <div className="form-group">
           <TextField label="Password" type="password" fullWidth required />
-          <Button type="submit" variant="contained" color="primary" fullWidth>
-            Sign Up
-          </Button>
-        </Box>
+        </div>
+        <Button type="submit" variant="contained" color="primary" fullWidth>
+          Sign Up
+        </Button>
       </form>
-      <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+      <p className="signup-footer">
         Already have an account? <a href="/">Login</a>
-      </Typography>
-    </Container>
+      </p>
+    </div>
   );
 };
 
