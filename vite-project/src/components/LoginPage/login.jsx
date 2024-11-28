@@ -1,51 +1,36 @@
-import React, { useState } from "react";
-import { TextField, Button } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import "./login.css";
+import React, { useState } from 'react';
+import { TextField, Button } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import './login.css';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState({ email: "", password: "" });
-
-  
   const handleLogin = (e) => {
     e.preventDefault();
 
     
-    setError({ email: "", password: "" });
+    const users = JSON.parse(localStorage.getItem('users')) || [];
 
-    let isValid = true;
+    let isValidUser = false;
 
-    
-    if (!email) {
-      setError((prev) => ({ ...prev, email: "Email is required" }));
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      setError((prev) => ({ ...prev, email: "Invalid email format" }));
-      isValid = false;
-    }
+for (const user of users) {
+  if (user.email === email && user.password === password) {
+    isValidUser = true;
+    break;
+  }
+}
 
-    
-    if (!password) {
-      setError((prev) => ({ ...prev, password: "Password is required" }));
-      isValid = false;
-    } else if (password.length < 6) {
-      setError((prev) => ({
-        ...prev,
-        password: "Password must be at least 6 characters",
-      }));
-      isValid = false;
-    }
-
-    
-    if (isValid) {
-      console.log("Login form submitted");
-      navigate("/products");
-    }
-  };
+if (isValidUser) {
+  console.log('Login successful');
+  navigate('/products');
+} else {
+  setError('Invalid email or password');
+}
+  }
 
   return (
     <div className="login-container">
@@ -59,8 +44,6 @@ const LoginPage = () => {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            error={!!error.email}
-            helperText={error.email}
           />
         </div>
         <div className="form-group">
@@ -71,10 +54,9 @@ const LoginPage = () => {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            error={!!error.password}
-            helperText={error.password}
           />
         </div>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <Button type="submit" variant="contained" color="primary" fullWidth>
           Login
         </Button>

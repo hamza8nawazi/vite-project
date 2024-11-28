@@ -1,29 +1,27 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import TablePagination from "@mui/material/TablePagination";
-import Paper from "@mui/material/Paper";
-import "./table.css";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TablePagination from '@mui/material/TablePagination';
+import Paper from '@mui/material/Paper';
+import './table.css';
 
 const ProductTable = ({ products }) => {
   const [page, setPage] = useState(0);
   const rowsPerPage = 5;
-
-  const navigate = useNavigate(); // To navigate to login after logout
+  const navigate = useNavigate();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleLogout = () => {
-    
-    console.log("User logged out.");
-    navigate("/"); 
+    console.log('User logged out');
+    navigate('/');
   };
 
   const paginatedProducts = products.slice(
@@ -33,16 +31,16 @@ const ProductTable = ({ products }) => {
 
   return (
     <div>
-      <div style={{ textAlign: "right", margin: "10px" }}>
+      <div style={{ textAlign: 'right', margin: '10px' }}>
         <button
           onClick={handleLogout}
           style={{
-            padding: "10px 15px",
-            background: "red",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
+            padding: '10px 15px',
+            background: 'red',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
           }}
         >
           Logout
@@ -64,10 +62,7 @@ const ProductTable = ({ products }) => {
                 <TableRow key={product.id}>
                   <TableCell>{product.id}</TableCell>
                   <TableCell>
-                    <Link
-                      to={`/product/${product.id}`}
-                      style={{ color: "blue", cursor: "pointer" }}
-                    >
+                    <Link to={`/product/${product.id}`} style={{ color: 'blue', cursor: 'pointer' }}>
                       {product.title}
                     </Link>
                   </TableCell>
@@ -79,11 +74,11 @@ const ProductTable = ({ products }) => {
         </TableContainer>
         <TablePagination
           component="div"
-          count={products.length} // Total number of products
+          count={products.length}
           page={page}
           onPageChange={handleChangePage}
-          rowsPerPage={rowsPerPage} // Fixed to 5 rows per page
-          rowsPerPageOptions={[]} // Hide rows per page dropdown
+          rowsPerPage={rowsPerPage}
+          rowsPerPageOptions={[]}
         />
       </Paper>
     </div>
