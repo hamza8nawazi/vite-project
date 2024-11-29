@@ -3,6 +3,18 @@ import { TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './signup.css';
 
+const isValidPassword = (password) => {
+  const hasUppercase = password.split('').some(char => char >= 'A' && char <= 'Z');
+  const hasLowercase = password.split('').some(char => char >= 'a' && char <= 'z');
+  const hasDigit = password.split('').some(char => !isNaN(char));
+  const specialCharacters = "!@#$%^&*()_+-=[]{}|;:'\",.<>?/";
+  const hasSpecialChar = password.split('').some(char => specialCharacters.includes(char));
+  const isAtLeastSixChars = password.length >= 6;
+
+  return hasUppercase && hasLowercase && hasDigit && hasSpecialChar && isAtLeastSixChars;
+};
+
+
 const SignupPage = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
@@ -21,6 +33,12 @@ const SignupPage = () => {
         return;
       }
     }
+
+    if (!isValidPassword(password)) {
+      setError("Password must include uppercase, lowercase, a number, and a special character, and be at least 6 characters long.");
+      return;
+    }
+
     
 
     const newUser = { name, email, password };
